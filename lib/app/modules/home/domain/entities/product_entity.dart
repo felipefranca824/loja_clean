@@ -1,10 +1,11 @@
 import 'package:equatable/equatable.dart';
+import 'package:loja_clean/app/modules/home/domain/entities/category_entity.dart';
 
 class ProductEntity extends Equatable {
   final int id;
   final String title;
   final double price;
-  final String category;
+  final CategoryEntity category;
   final String description;
   final String image;
 
