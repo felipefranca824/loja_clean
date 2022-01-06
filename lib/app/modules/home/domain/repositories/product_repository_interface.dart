@@ -7,4 +7,5 @@ abstract class ProductRepositoryInterface {
   Future<Either<Failure, List<ProductEntity>>> getAllProducts();
   Future<Either<Failure, List<ProductEntity>>> getProductsFromCategory(
       {required CategoryEntity category});
+  Future<Either<Failure, ProductEntity>> getProductById(int id);
 }
