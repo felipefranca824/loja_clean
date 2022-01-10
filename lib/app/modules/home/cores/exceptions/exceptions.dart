@@ -32,3 +32,14 @@ class GetProductsFromCategoryException extends Equatable implements Exception {
         message,
       ];
 }
+
+class GetAllCategoriesException extends Equatable implements Exception {
+  final String message;
+
+  const GetAllCategoriesException({required this.message});
+
+  @override
+  List<Object?> get props => [
+        message,
+      ];
+}
