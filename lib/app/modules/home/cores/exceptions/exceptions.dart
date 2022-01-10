@@ -10,3 +10,25 @@ class GetAllProductsException extends Equatable implements Exception {
         message,
       ];
 }
+
+class GetProductByIdException extends Equatable implements Exception {
+  final String message;
+
+  const GetProductByIdException({required this.message});
+
+  @override
+  List<Object?> get props => [
+        message,
+      ];
+}
+
+class GetProductsFromCategoryException extends Equatable implements Exception {
+  final String message;
+
+  const GetProductsFromCategoryException({required this.message});
+
+  @override
+  List<Object?> get props => [
+        message,
+      ];
+}

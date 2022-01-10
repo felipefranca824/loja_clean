@@ -22,15 +22,24 @@ class ProductRepository implements ProductRepositoryInterface {
   }
 
   @override
-  Future<Either<Failure, ProductEntity>> getProductById(int id) {
-    // TODO: implement getProductById
-    throw UnimplementedError();
+  Future<Either<Failure, ProductEntity>> getProductById(int id) async {
+    try {
+      final result = await datasource.getProductById(id: id);
+      return Right(result);
+    } on GetProductByIdException {
+      return Left(ServerFailure(message: "Falha ao buscar os dados"));
+    }
   }
 
   @override
   Future<Either<Failure, List<ProductEntity>>> getProductsFromCategory(
-      {required CategoryEntity category}) {
-    // TODO: implement getProductsFromCategory
-    throw UnimplementedError();
+      {required CategoryEntity category}) async {
+    try {
+      final result =
+          await datasource.getProductsFromCategory(category: category);
+      return Right(result);
+    } on GetProductsFromCategoryException {
+      return Left(ServerFailure(message: 'Falha ao buscar os dados'));
+    }
   }
 }
