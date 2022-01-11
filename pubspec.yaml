@@ -41,6 +41,7 @@ dependencies:
   equatable:
   dartz:
   json_serializable: ^6.1.3
+  dio:
 
 dev_dependencies:
   flutter_test:
