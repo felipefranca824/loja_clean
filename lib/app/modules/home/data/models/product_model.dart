@@ -16,16 +16,16 @@ class ProductModel extends ProductEntity {
             title: title,
             description: description,
             category: category,
-            price: price,
+            price: price + 0.00,
             image: image);
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-        id: int.parse(json['id']),
+        id: json['id'],
         title: json['title'],
         description: json['description'],
         category: CategoryModel(name: json['category']),
-        price: double.parse(json['price']),
+        price: double.parse(json['price'].toString()),
         image: json['image']);
   }
 
