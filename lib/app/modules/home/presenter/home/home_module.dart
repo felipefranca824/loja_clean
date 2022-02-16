@@ -4,6 +4,7 @@ import 'package:loja_clean/app/modules/home/data/repositories/category_repositor
 import 'package:loja_clean/app/modules/home/data/repositories/product_repository.dart';
 import 'package:loja_clean/app/modules/home/domain/usecases/get_all_categories_usecase.dart';
 import 'package:loja_clean/app/modules/home/domain/usecases/get_all_products_usecase.dart';
+import 'package:loja_clean/app/modules/home/domain/usecases/get_products_from_category_usecase.dart';
 import 'package:loja_clean/app/modules/home/external/fakerapi/fakerapi_category_datasource.dart';
 import 'package:loja_clean/app/modules/home/external/fakerapi/fakerapi_product_datasource.dart';
 import 'package:loja_clean/app/modules/home/presenter/details_product/details_product_page.dart';
@@ -21,12 +22,14 @@ class HomeModule extends Module {
     Bind.factory((i) => FakerapiCategoryDatasource(client: i())),
     Bind.factory((i) => CategoryRepository(datasource: i())),
     Bind.factory((i) => GetAllCategoriesUsecase(repository: i())),
+    Bind.factory((i) => GetProductsFromCategoryUsecase(repository: i())),
     Bind.lazySingleton((i) => HomeStore()),
   ];
 
   @override
   final List<ModularRoute> routes = [
     ChildRoute(Modular.initialRoute, child: (_, args) => const HomePage()),
-    ChildRoute('/details', child: (_, args) => const DetailsProductPage()),
+    ChildRoute('/details',
+        child: (_, args) => DetailsProductPage(product: args.data)),
   ];
 }

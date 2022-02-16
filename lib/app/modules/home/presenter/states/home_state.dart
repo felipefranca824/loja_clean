@@ -3,20 +3,20 @@ import 'package:loja_clean/app/modules/home/domain/entities/product_entity.dart'
 
 abstract class HomeState {}
 
-class GetAllProductsStateSucess implements HomeState {
+class GetProductsStateSucess implements HomeState {
   final List<ProductEntity> data;
-  GetAllProductsStateSucess({
+  GetProductsStateSucess({
     required this.data,
   });
 }
 
-class GetAllProductsStateInitial implements HomeState {}
+class GetProductsStateInitial implements HomeState {}
 
-class GetAllProductsStateLoading implements HomeState {}
+class GetProductsStateLoading implements HomeState {}
 
-class GetAllProductsStateError implements HomeState {
+class GetProductsStateError implements HomeState {
   final String error;
-  GetAllProductsStateError({
+  GetProductsStateError({
     required this.error,
   });
 }

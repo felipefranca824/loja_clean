@@ -72,6 +72,21 @@ mixin _$HomeStore on HomeStoreBase, Store {
     });
   }
 
+  final _$categorySelectedAtom = Atom(name: 'HomeStoreBase.categorySelected');
+
+  @override
+  int get categorySelected {
+    _$categorySelectedAtom.reportRead();
+    return super.categorySelected;
+  }
+
+  @override
+  set categorySelected(int value) {
+    _$categorySelectedAtom.reportWrite(value, super.categorySelected, () {
+      super.categorySelected = value;
+    });
+  }
+
   final _$setListProductsAsyncAction =
       AsyncAction('HomeStoreBase.setListProducts');
 
@@ -92,11 +107,22 @@ mixin _$HomeStore on HomeStoreBase, Store {
       ActionController(name: 'HomeStoreBase');
 
   @override
-  dynamic setGetAllProductsState(HomeState state) {
+  dynamic setCatgeorySeleccted(int value) {
     final _$actionInfo = _$HomeStoreBaseActionController.startAction(
-        name: 'HomeStoreBase.setGetAllProductsState');
+        name: 'HomeStoreBase.setCatgeorySeleccted');
     try {
-      return super.setGetAllProductsState(state);
+      return super.setCatgeorySeleccted(value);
+    } finally {
+      _$HomeStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setGetProductsState(HomeState state) {
+    final _$actionInfo = _$HomeStoreBaseActionController.startAction(
+        name: 'HomeStoreBase.setGetProductsState');
+    try {
+      return super.setGetProductsState(state);
     } finally {
       _$HomeStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -119,7 +145,8 @@ mixin _$HomeStore on HomeStoreBase, Store {
 listProducts: ${listProducts},
 listCategories: ${listCategories},
 getAllProductsState: ${getAllProductsState},
-getAllCategoriesState: ${getAllCategoriesState}
+getAllCategoriesState: ${getAllCategoriesState},
+categorySelected: ${categorySelected}
     ''';
   }
 }

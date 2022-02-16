@@ -43,15 +43,17 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
               final state = controller.getAllCategoriesState
                   as GetAllCategoriesStateSucess;
 
-              return ListCategories(list: state.data);
+              return ListCategories(
+                list: state.data,
+                controller: controller,
+              );
             } else {
               return Container();
             }
           }),
           const Divider(),
           Observer(builder: (_) {
-            if ((controller.getAllProductsState
-                    is GetAllProductsStateLoading) ||
+            if ((controller.getAllProductsState is GetProductsStateLoading) ||
                 (controller.getAllCategoriesState
                     is GetAllCategoriesStateLoading)) {
               print(controller.getAllCategoriesState);
@@ -60,15 +62,15 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 child: CircularProgressIndicator(),
               );
             } else if (controller.getAllProductsState
-                is GetAllProductsStateError) {
+                is GetProductsStateError) {
               final state =
-                  controller.getAllProductsState as GetAllProductsStateError;
+                  controller.getAllProductsState as GetProductsStateError;
               return Center(
                 child: Text(state.error),
               );
             }
             final state =
-                controller.getAllProductsState as GetAllProductsStateSucess;
+                controller.getAllProductsState as GetProductsStateSucess;
 
             return Expanded(
               child: GridView.builder(

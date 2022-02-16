@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:loja_clean/app/modules/home/data/models/category_model.dart';
 import 'package:loja_clean/app/modules/home/domain/entities/category_entity.dart';
 import 'package:loja_clean/app/modules/home/domain/entities/product_entity.dart';
 import 'package:loja_clean/app/modules/home/domain/usecases/get_all_products_usecase.dart';
+import 'package:loja_clean/app/modules/home/domain/usecases/get_products_from_category_usecase.dart';
 import 'package:loja_clean/app/modules/home/presenter/states/home_state.dart';
 import 'package:mobx/mobx.dart';
 
@@ -16,9 +18,12 @@ class HomeStore = HomeStoreBase with _$HomeStore;
 abstract class HomeStoreBase with Store {
   late GetAllProductsUsecase getAllProductsUsecase;
   late GetAllCategoriesUsecase getAllCategoriesUsecase;
+  late GetProductsFromCategoryUsecase getProductsFromCategoryUsecase;
   HomeStoreBase() {
     getAllProductsUsecase = Modular.get<GetAllProductsUsecase>();
     getAllCategoriesUsecase = Modular.get<GetAllCategoriesUsecase>();
+    getProductsFromCategoryUsecase =
+        Modular.get<GetProductsFromCategoryUsecase>();
   }
 
   @observable
@@ -28,13 +33,21 @@ abstract class HomeStoreBase with Store {
   List<CategoryEntity> listCategories = [];
 
   @observable
-  HomeState getAllProductsState = GetAllProductsStateInitial();
+  HomeState getAllProductsState = GetProductsStateInitial();
 
   @observable
   HomeState getAllCategoriesState = GetAllCategoriesStateInitial();
 
+  @observable
+  int categorySelected = 0;
+
   @action
-  setGetAllProductsState(HomeState state) {
+  setCatgeorySeleccted(int value) {
+    categorySelected = value;
+  }
+
+  @action
+  setGetProductsState(HomeState state) {
     getAllProductsState = state;
   }
 
@@ -46,13 +59,13 @@ abstract class HomeStoreBase with Store {
   @action
   Future<void> setListProducts() async {
     print("Comecou");
-    setGetAllProductsState(GetAllProductsStateLoading());
+    setGetProductsState(GetProductsStateLoading());
     final list = await getAllProductsUsecase();
     list.fold(
-        (l) => setGetAllProductsState(
-            GetAllProductsStateError(error: 'Erro ao buscar produtos')), (r) {
+        (l) => setGetProductsState(
+            GetProductsStateError(error: 'Erro ao buscar produtos')), (r) {
       listProducts = r;
-      setGetAllProductsState(GetAllProductsStateSucess(data: listProducts));
+      setGetProductsState(GetProductsStateSucess(data: listProducts));
       print("terminou");
     });
   }
@@ -69,6 +82,18 @@ abstract class HomeStoreBase with Store {
       print("terminou 2");
       setGetAllCategoriesState(
           GetAllCategoriesStateSucess(data: listCategories));
+    });
+  }
+
+  Future<void> getProductsFromCategories(CategoryEntity category) async {
+    setGetProductsState(GetProductsStateLoading());
+    final list = await getProductsFromCategoryUsecase(category);
+
+    list.fold(
+        (l) => setGetProductsState(
+            GetProductsStateError(error: 'Erro ao buscar produtos')), (r) {
+      listProducts = r;
+      setGetProductsState(GetProductsStateSucess(data: listProducts));
     });
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:loja_clean/app/modules/home/domain/entities/product_entity.dart';
+
 import 'container_color.dart';
 import 'indicator_images.dart';
 import 'row_colors.dart';
@@ -8,7 +10,9 @@ import 'row_sizes.dart';
 class Body extends StatelessWidget {
   const Body({
     Key? key,
+    required this.product,
   }) : super(key: key);
+  final ProductEntity product;
 
   @override
   Widget build(BuildContext context) {
@@ -33,38 +37,7 @@ class Body extends StatelessWidget {
                       ),
                     ),
                     Image.network(
-                      'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-                      fit: BoxFit.scaleDown,
-                    ),
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        padding: const EdgeInsets.only(left: 20),
-                        height: 300,
-                        child: const Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.only(left: 20),
-                      height: 300,
-                      child: const Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Image.network(
-                      'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
+                      product.image,
                       fit: BoxFit.scaleDown,
                     ),
                     InkWell(
@@ -122,14 +95,15 @@ class Body extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
+            children: [
+              const Text(
                 'Price:',
                 style: TextStyle(fontSize: 18.0),
               ),
               Text(
-                '\$ 349.99',
-                style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+                '\$ ${product.price}',
+                style: const TextStyle(
+                    fontSize: 22.0, fontWeight: FontWeight.bold),
               ),
             ],
           ),
