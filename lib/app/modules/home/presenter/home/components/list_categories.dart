@@ -28,15 +28,12 @@ class ListCategories extends StatelessWidget {
                     ? () {
                         controller.setListCategories();
                         controller.setCatgeorySeleccted(index);
-                        print("${controller.categorySelected} index: $index");
                       }
                     : () {
                         controller.getProductsFromCategories(list[index - 1]);
                         controller.setCatgeorySeleccted(index);
-                        print("${controller.categorySelected} index: $index");
                       },
                 child: Observer(builder: (_) {
-                  print('REFEZZZZZ');
                   return Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
