@@ -25,20 +25,17 @@ class DetailsProductPage extends StatelessWidget {
             Modular.to.pop();
           },
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20.0),
-            child: Center(
-              child: Text(
-                product.title,
-                style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black87),
-              ),
-            ),
-          )
-        ],
+        title: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.90,
+          child: Text(
+            product.title,
+            style: const TextStyle(
+                overflow: TextOverflow.ellipsis,
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: Colors.black87),
+          ),
+        ),
       ),
       body: Body(
         product: product,

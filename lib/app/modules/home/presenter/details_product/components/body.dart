@@ -36,9 +36,13 @@ class Body extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    Image.network(
-                      product.image,
-                      fit: BoxFit.scaleDown,
+                    SizedBox(
+                      height: 300,
+                      width: 200,
+                      child: Image.network(
+                        product.image,
+                        fit: BoxFit.scaleDown,
+                      ),
                     ),
                     InkWell(
                       onTap: () {},
@@ -111,6 +115,7 @@ class Body extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
+        const Spacer(),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Container(
@@ -135,7 +140,10 @@ class Body extends StatelessWidget {
               ),
             ),
           ),
-        )
+        ),
+        const SizedBox(
+          height: 20,
+        ),
       ],
     );
   }

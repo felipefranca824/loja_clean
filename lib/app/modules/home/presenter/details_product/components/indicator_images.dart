@@ -14,28 +14,33 @@ class IndicatorImages extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       height: 8,
-      child: Expanded(
-        child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: quantifyImages,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return Container(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 3.0),
-                  child: Container(
-                    width: index == imageSelected ? 32 : 16,
-                    decoration: BoxDecoration(
-                        color: index == imageSelected
-                            ? Colors.black
-                            : Colors.black38,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(20))),
-                  ),
-                ),
-              );
-            }),
+      width: MediaQuery.of(context).size.width * 0.25,
+      child: Row(
+        children: [
+          Expanded(
+            child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: quantifyImages,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return Container(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                      child: Container(
+                        width: index == imageSelected ? 32 : 16,
+                        decoration: BoxDecoration(
+                            color: index == imageSelected
+                                ? Colors.black
+                                : Colors.black38,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(20))),
+                      ),
+                    ),
+                  );
+                }),
+          ),
+        ],
       ),
     );
   }

@@ -18,37 +18,42 @@ class ListCategories extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 30,
-      child: Expanded(
-        child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: list.length + 1,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: index == 0
-                    ? () {
-                        controller.setListCategories();
-                        controller.setCatgeorySeleccted(index);
-                      }
-                    : () {
-                        controller.getProductsFromCategories(list[index - 1]);
-                        controller.setCatgeorySeleccted(index);
-                      },
-                child: Observer(builder: (_) {
-                  return Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    child: Text(
-                      index == 0 ? "New arrivals" : list[index - 1].name,
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: controller.categorySelected == index
-                              ? FontWeight.bold
-                              : FontWeight.normal),
-                    ),
+      child: Row(
+        children: [
+          Expanded(
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: list.length + 1,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: index == 0
+                        ? () {
+                            controller.setListCategories();
+                            controller.setCatgeorySeleccted(index);
+                          }
+                        : () {
+                            controller
+                                .getProductsFromCategories(list[index - 1]);
+                            controller.setCatgeorySeleccted(index);
+                          },
+                    child: Observer(builder: (_) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 5),
+                        child: Text(
+                          index == 0 ? "New arrivals" : list[index - 1].name,
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: controller.categorySelected == index
+                                  ? FontWeight.bold
+                                  : FontWeight.normal),
+                        ),
+                      );
+                    }),
                   );
                 }),
-              );
-            }),
+          ),
+        ],
       ),
     );
   }

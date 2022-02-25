@@ -30,7 +30,14 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: const [Icon(Icons.format_list_bulleted_sharp)],
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 8.0),
+            child: Icon(
+              Icons.format_list_bulleted_sharp,
+            ),
+          )
+        ],
         title: const Text('Zummedy'),
         centerTitle: true,
       ),
@@ -56,8 +63,6 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
             if ((controller.getAllProductsState is GetProductsStateLoading) ||
                 (controller.getAllCategoriesState
                     is GetAllCategoriesStateLoading)) {
-              print(controller.getAllCategoriesState);
-              print(controller.getAllProductsState);
               return const Center(
                 child: CircularProgressIndicator(),
               );
